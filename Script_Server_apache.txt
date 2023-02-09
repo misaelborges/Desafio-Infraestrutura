@@ -1,0 +1,25 @@
+#! /bin/bash
+echo "####################################"
+echo "####################################"
+echo "######### Atualizar Linux ##########"
+echo "####################################"
+echo "####################################"
+apt update -y
+apt upgrade -y
+
+echo "## Baixando e instalando o Unzip ###"
+apt install unzip -y
+
+echo "## Baixando e instalando o Apache ##"
+apt install apache2 -y
+
+echo "#### Baixar arquivos do Git Hub ####"
+wget -P /tmp https://github.com/denilsonbonatti/linux-site-dio/archive/refs/heads/main.zip
+
+echo "###### Descompactando arquivos #####"
+
+unzip /tmp/main.zip -d /var/www/html/DIO
+mv /var/www/html/DIO/linux-site-dio-main/* /var/www/html
+systemctl restart apache2
+
+echo "######## Script finalizado #########"

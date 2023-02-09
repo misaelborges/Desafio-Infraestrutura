@@ -1,0 +1,43 @@
+#! /bin/bash
+
+echo "======== Criando Pastas ======"
+mkdir /mnt/publico /mnt/adm /mnt/ven /mnt/sec
+echo "======== Pastas Criadas ======="
+
+echo "======== Criando Grupos ======"
+groupadd GRP_ADM
+groupadd GRP_VEN
+groupadd GRP_SEC
+groupadd publico
+echo "======== Grupos Criados ======"
+
+echo "======== Criando Users ======="
+# Users ADM--------------------------
+useradd carlos -c "Carlos Setor ADM" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_ADM
+useradd maria -c "Maria Setor ADM" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_ADM
+useradd joao -c "Joao Setor ADM" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_ADM
+
+# Users VEN--------------------------
+useradd debora -c "Debora setor VEN" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_VEN
+useradd sebastiana -c "Sebastiana setor VEN" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_VEN
+useradd roberto -c "Roberto setor VEN" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_VEN
+
+# Users SEC--------------------------
+useradd josefina -c "Josefina  setor SEC" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_SEC
+useradd amanda -c "Amanda  setor SEC" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_SEC
+useradd rogerio -c "Rogerio  setor SEC" -s /bin/bash -m -p $(openssl passwd -crypt Senha123) -G GRP_SEC
+echo "=========Users Criados+======="
+
+echo "===== Aplicando permissões ====="
+echo "========== de pastas ==========="
+chown root:GRP_VEN /mnt/ven
+chown root:GRP_ADM /mnt/adm
+chown root:GRP_SEC /mnt/sec
+chown root:publico /mnt/publico
+chmod 770 /mnt/ven
+chmod 770 /mnt/adm
+chmod 770 /mnt/sec
+chmod 777 /mnt/publico
+echo "  "
+echo "  "
+echo "========Fim da execução======="
